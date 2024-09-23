@@ -1,0 +1,110 @@
+{% extends "nav.html" %} {% block content %}
+<title>Latest Prducts</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+    padding-top: 80px; /* เพิ่ม padding-top เพื่อเลื่อนเนื้อหาลงมา */
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .products {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .product {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 30%;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .product:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  .product img {
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    transition: transform 0.3s;
+  }
+  .product-content {
+    padding: 20px;
+    transition: transform 0.3s;
+  }
+  .product-content h2 {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+  }
+  .product-content p {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #666;
+  }
+  .product-content .price {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+  }
+
+  /* Media query for mobile */
+  @media (max-width: 768px) {
+    .products {
+      flex-direction: column;
+      align-items: center;
+    }
+    .product {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+</style>
+
+<body>
+  <div class="container">
+    <div class="title">ผลิตภัณฑ์ล่าสุดของเรา มาดูว่ามีอะไรใหม่บ้างได้เลย</div>
+    <div class="products">
+      <!-- Product 1 -->
+      <div class="product">
+        <img src="static/images/profile.png" alt="iPhne 16 Pr" />
+        <div class="product-content">
+          <h2>iPhne 16 Pr</h2>
+          <p>ที่สุดของ iPhne</p>
+          <p class="price">เริ่มต้นที่ ฿39,900</p>
+        </div>
+      </div>
+      <!-- Product 2 -->
+      <div class="product">
+        <img src="static/images/profile.png" alt="Apple Watch Series 10" />
+        <div class="product-content">
+          <h2>Apple Watch Series 10</h2>
+          <p>บางกว่าเคย คลาสสิกเหมือนเคย</p>
+          <p class="price">เริ่มต้นที่ ฿14,900</p>
+        </div>
+      </div>
+      <!-- Product 3 -->
+      <div class="product">
+        <img src="static/images/profile.png" alt="iPhne 16" />
+        <div class="product-content">
+          <h2>iPhne 16</h2>
+          <p>ขุมพลังครบเครื่อง</p>
+          <p class="price">เริ่มต้นที่ ฿29,900</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock content %}

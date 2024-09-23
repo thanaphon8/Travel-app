@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar คล้าย Apple</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        height: 2000px;
+        padding-top: 60px; /* เพิ่มระยะห่างจาก navbar */
+      }
+      /* สไตล์สำหรับ navbar */
+      .navbar {
+        background-color: #f5f5f5; /* สีพื้นหลังเทาอ่อน */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        transition: opacity 0.5s ease, transform 0.5s ease; /* เพิ่ม transition */
+        position: fixed; /* ทำให้ navbar อยู่ที่ด้านบน */
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+      .navbar.hidden {
+        opacity: 0;
+        transform: translateY(-100%);
+      }
+      .navbar.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease, opacity 0.5s ease;
+        opacity: 0;
+        background-color: #f5f5f5; /* สีพื้นหลังของรายการเป็นสีเดียวกัน */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+      .navbar ul.show {
+        max-height: 500px;
+        opacity: 1;
+      }
+      .navbar ul li {
+        margin: 10px 20px;
+      }
+      .navbar ul li a {
+        text-decoration: none;
+        color: black;
+        font-weight: normal;
+        font-size: 14px;
+        display: block;
+      }
+      .navbar ul li a:hover {
+        color: #555555;
+      }
+      .navbar-icon {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+      .navbar-right {
+        display: flex;
+        align-items: center;
+      }
+      .navbar-right .profile {
+        margin-left: 20px;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+      }
+      .navbar-right .icon {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+      /* สำหรับการแสดงผลบนมือถือและ iPad */
+      @media (max-width: 1024px) {
+        .navbar ul {
+          margin-top: 0;
+        }
+        .navbar ul li a {
+          font-size: 18px; /* เพิ่มขนาดตัวอักษรสำหรับรายการ */
+          font-weight: bold;
+        }
+      }
+      /* สำหรับการแสดงผลบน PC */
+      @media (min-width: 1025px) {
+        .navbar ul {
+          display: flex;
+          max-height: none;
+          opacity: 1;
+          position: static;
+        }
+        .navbar ul li {
+          margin: 0 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar visible" id="navbar">
+      <a href="#" id="logo-btn">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+          alt="Apple"
+          class="navbar-icon"
+        />
+      </a>
+      <ul id="navbar-menu">
+        <li><a href="#">ร้าน</a></li>
+        <li><a href="#">Mac</a></li>
+        <li><a href="#">iPad</a></li>
+        <li><a href="#">iPhone</a></li>
+        <li><a href="#">Watch</a></li>
+        <li><a href="#">AirPods</a></li>
+        <li><a href="#">TV และบ้าน</a></li>
+        <li><a href="#">ความบันเทิง</a></li>
+        <li><a href="#">อุปกรณ์เสริม</a></li>
+        <li><a href="#">บริการช่วยเหลือ</a></li>
+      </ul>
+      <div class="navbar-right">
+        <div class="profile">
+          <img src="static/images/profile.png" alt="Profile" class="icon" />
+        </div>
+      </div>
+    </nav>
+
+    <script>
+      document
+        .getElementById("logo-btn")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          var menu = document.getElementById("navbar-menu");
+          menu.classList.toggle("show");
+        });
+
+      document.addEventListener("click", function (event) {
+        var menu = document.getElementById("navbar-menu");
+        var logoButton = document.getElementById("logo-btn");
+        var profileButton = document.querySelector(".profile");
+        if (
+          !menu.contains(event.target) &&
+          !logoButton.contains(event.target) &&
+          !profileButton.contains(event.target)
+        ) {
+          menu.classList.remove("show");
+        }
+      });
+
+      let lastScrollTop = 0;
+      const navbar = document.getElementById("navbar");
+
+      window.addEventListener("scroll", function () {
+        let scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+          navbar.classList.add("hidden");
+          navbar.classList.remove("visible");
+        } else {
+          navbar.classList.remove("hidden");
+          navbar.classList.add("visible");
+        }
+
+        // ทำให้ navbar ชัดเจนเมื่อเลื่อนขึ้น
+        if (scrollTop < lastScrollTop) {
+          navbar.classList.remove("hidden");
+          navbar.classList.add("visible");
+        }
+
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      });
+
+      document
+        .getElementById("navbar")
+        .addEventListener("click", function (event) {
+          const menu = document.getElementById("navbar-menu");
+          const logoButton = document.getElementById("logo-btn");
+          const profileButton = document.querySelector(".profile");
+
+          if (
+            !menu.contains(event.target) &&
+            !logoButton.contains(event.target) &&
+            !profileButton.contains(event.target)
+          ) {
+            scrollToTop();
+          }
+        });
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>
+{% block content %}{% endblock content %}o
