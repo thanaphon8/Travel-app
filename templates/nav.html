@@ -1,173 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Travel App</title>
+    <title>Navbar คล้าย Apple</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
         margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-        padding-top: 70px; /* ให้เนื้อหาไม่ถูกปิดบังโดย navbar */
+        font-family: Arial, sans-serif;
+        height: 2000px;
+        padding-top: 60px; /* เพิ่มระยะห่างจาก navbar */
       }
       .navbar {
+        background-color: #f5f5f5; /* สีพื้นหลังเทาอ่อน */
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #0044cc;
-        padding: 15px;
-        color: white;
-        position: fixed; /* ทำให้ navbar คงที่ */
-        top: 0; /* วางที่ด้านบน */
-        left: 0; /* เริ่มจากขอบซ้าย */
-        right: 0; /* ขยายไปขอบขวา */
-        z-index: 1000; /* ให้อยู่เหนือเนื้อหาอื่น ๆ */
-      }
-      .navbar .logo {
-        font-size: 24px;
-        font-weight: bold;
-      }
-      .navbar ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-      }
-      .navbar ul li {
-        margin-left: 20px;
-      }
-      .navbar ul li a {
-        color: white;
-        text-decoration: none;
-        padding: 8px 12px;
-        transition: background-color 0.3s;
-      }
-      .navbar ul li a:hover {
-        background-color: #002d80;
-        border-radius: 5px;
-      }
-      .navbar .login {
-        background-color: #ffffff;
-        color: #0044cc;
-        padding: 8px 12px;
-        border-radius: 5px;
-        text-decoration: none;
-      }
-      .hamburger {
-        display: none;
-        flex-direction: column;
-        cursor: pointer;
-      }
-      .hamburger div {
-        width: 25px;
-        height: 3px;
-        background-color: white;
-        margin: 4px;
-      }
-
-      /* Sidebar styles */
-      .sidebar {
-        height: 100%;
-        width: 250px;
+        padding: 10px 20px;
         position: fixed;
         top: 0;
-        left: -250px; /* ซ่อน sidebar */
-        background-color: #0044cc;
-        overflow-x: hidden;
-        transition: 0.5s;
-        padding-top: 60px;
-        z-index: 999; /* ต่ำกว่า navbar */
+        left: 0;
+        right: 0;
+        z-index: 1000;
       }
-      .sidebar ul {
-        list-style: none;
+      .navbar ul {
+        list-style-type: none;
+        margin: 0;
         padding: 0;
-      }
-      .sidebar ul li {
-        padding: 10px 20px;
-      }
-      .sidebar ul li a {
-        color: white;
-        text-decoration: none;
-        display: block;
-        transition: background-color 0.3s;
-      }
-      .sidebar ul li a:hover {
-        background-color: #002d80;
-      }
-
-      .sidebar .close-btn {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease, opacity 0.5s ease;
+        opacity: 0;
+        background-color: #f5f5f5;
         position: absolute;
-        top: 10px;
-        right: 20px;
-        font-size: 30px;
-        color: white;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+      .navbar ul.show {
+        max-height: 500px;
+        opacity: 1;
+      }
+      .navbar ul li {
+        margin: 10px 20px;
+      }
+      .navbar ul li a {
+        text-decoration: none;
+        color: black;
+        font-weight: normal;
+        font-size: 14px;
+        display: block;
+      }
+      .navbar ul li a:hover {
+        color: #555555;
+      }
+      .navbar-icon {
+        display: none; /* ซ่อนโลโก้บนมือถือ */
+      }
+      .toggle-icon {
+        width: 20px;
+        height: 20px;
         cursor: pointer;
+        display: none;
       }
-
-      /* Responsive Design for Mobile and Tablets */
-      @media (max-width: 768px) {
-        .navbar ul {
-          display: none; /* ซ่อนรายการปกติในมือถือ */
+      .navbar-right {
+        display: flex;
+        align-items: center;
+      }
+      .navbar-right .profile {
+        margin-left: 20px;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+      }
+      .navbar-right .icon {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+      /* สำหรับการแสดงผลบนมือถือและ iPad */
+      @media (max-width: 1024px) {
+        .toggle-icon {
+          display: block; /* แสดงปุ่ม toggle บนมือถือ */
         }
-        .hamburger {
+        .navbar ul {
+          margin-top: 0;
+        }
+        .navbar ul li a {
+          font-size: 18px;
+          font-weight: bold;
+        }
+        .navbar-icon {
+          display: none; /* ซ่อนโลโก้บนมือถือ */
+        }
+      }
+      /* สำหรับการแสดงผลบน PC */
+      @media (min-width: 1025px) {
+        .navbar ul {
           display: flex;
+          max-height: none;
+          opacity: 1;
+          position: static;
         }
-      }
-
-      /* Toggle menu when clicked */
-      .sidebar.active {
-        left: 0; /* แสดง sidebar เมื่อกด */
-      }
-
-      /* Show menu normally on PC */
-      @media (min-width: 769px) {
-        .sidebar {
-          display: none; /* ซ่อน sidebar บน PC */
+        .navbar ul li {
+          margin: 0 15px;
         }
-        .navbar ul {
-          display: flex; /* แสดงรายการปกติใน PC */
+        .toggle-icon {
+          display: none; /* ซ่อนปุ่ม toggle บน PC */
         }
-        .hamburger {
-          display: none; /* ซ่อนปุ่ม hamburger ใน PC */
+        .navbar-icon {
+          display: block; /* แสดงโลโก้บน PC */
+          width: 20px;
+          height: 20px;
         }
       }
     </style>
   </head>
   <body>
-    <nav class="navbar">
-      <div class="logo">TravelApp</div>
-      <ul>
-        <li><a href="travel">Destinations</a></li>
-        <li><a href="#bookings">Bookings</a></li>
-        <li><a href="#deals">Deals</a></li>
-        <li><a href="contact">Contact Us</a></li>
+    <nav class="navbar" id="navbar">
+      <a href="#" id="logo-btn">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+          alt="Apple"
+          class="navbar-icon"
+        />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Hamburger_icon.svg"
+          alt="Toggle Menu"
+          class="toggle-icon"
+          id="toggle-btn"
+        />
+      </a>
+      <ul id="navbar-menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="travel">ร้าน</a></li>
+        <li><a href="#">Mac</a></li>
+        <li><a href="#">iPad</a></li>
+        <li><a href="#">iPhone</a></li>
+        <li><a href="#">Watch</a></li>
+        <li><a href="#">AirPods</a></li>
+        <li><a href="#">TV และบ้าน</a></li>
+        <li><a href="#">ความบันเทิง</a></li>
+        <li><a href="#">อุปกรณ์เสริม</a></li>
+        <li><a href="#">บริการช่วยเหลือ</a></li>
       </ul>
-      <a href="#login" class="login">Login</a>
-      <div class="hamburger" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
+      <div class="navbar-right">
+        <div class="profile">
+          <img src="static/images/profile.png" alt="Profile" class="icon" />
+        </div>
       </div>
     </nav>
 
-    <!-- Sidebar -->
-    <div id="sidebar" class="sidebar">
-      <span class="close-btn" onclick="toggleMenu()">&times;</span>
-      <ul>
-        <li><a href="#destinations">Destinations</a></li>
-        <li><a href="#bookings">Bookings</a></li>
-        <li><a href="#deals">Deals</a></li>
-        <li><a href="#contact">Contact Us</a></li>
-      </ul>
-    </div>
-
     <script>
-      function toggleMenu() {
-        const sidebar = document.getElementById("sidebar");
-        sidebar.classList.toggle("active");
-      }
+      document
+        .getElementById("toggle-btn")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          var menu = document.getElementById("navbar-menu");
+          menu.classList.toggle("show");
+        });
+
+      document.addEventListener("click", function (event) {
+        var menu = document.getElementById("navbar-menu");
+        var toggleButton = document.getElementById("toggle-btn");
+        var profileButton = document.querySelector(".profile");
+        if (
+          !menu.contains(event.target) &&
+          !toggleButton.contains(event.target) &&
+          !profileButton.contains(event.target)
+        ) {
+          menu.classList.remove("show");
+        }
+      });
     </script>
   </body>
 </html>
