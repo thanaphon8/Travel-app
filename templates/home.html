@@ -1,5 +1,5 @@
 {% extends "nav.html" %} {% block content %}
-<title>Latest Prducts</title>
+<title>Latest Products</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -60,6 +60,22 @@
     font-weight: bold;
   }
 
+  /* ปรับปรุงปุ่ม */
+  button {
+    background-color: #6633cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px; /* เพิ่มขนาด padding */
+    font-size: 18px; /* เพิ่มขนาดฟอนต์ */
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+
+  button:hover {
+    transform: scale(1.1); /* ขยายขนาดปุ่มเล็กน้อย */
+  }
+
   /* Media query for mobile */
   @media (max-width: 768px) {
     .products {
@@ -104,6 +120,12 @@
           <p class="price">เริ่มต้นที่ ฿29,900</p>
         </div>
       </div>
+    </div>
+    <!-- ปุ่ม Go Travel Now -->
+    <div style="text-align: center; margin-top: 20px">
+      <a href="travel" style="text-decoration: none">
+        <button>Go Travel Now</button>
+      </a>
     </div>
   </div>
 </body>
