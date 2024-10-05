@@ -9,3 +9,7 @@ def homePage(request):
 
 def navebar(request):
     return render(request, 'nav.html')
+
+
+def contactPage(request):
+    return render(request, 'contact.html')
