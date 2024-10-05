@@ -13,3 +13,7 @@ def navebar(request):
 
 def contactPage(request):
     return render(request, 'contact.html')
+
+
+def travelPage(request):
+    return render(request, 'travel.html')

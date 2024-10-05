@@ -1,0 +1,467 @@
+{% extends "nav.html" %} {% block content %}
+<div class="news-container">
+  <style>
+    body {
+      background-color: #ffffff; /* สีพื้นหลังของทั้งหน้า */
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeInAnimation 1s ease-in forwards;
+    }
+
+    @keyframes fadeInAnimation {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .news-container {
+      background-color: #ffffff; /* สีพื้นหลังของคอนเทนเนอร์ */
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      margin: 20px auto;
+    }
+
+    .news-container h1 {
+      margin: 0 0 20px;
+      font-size: 28px;
+      color: #333;
+      text-align: center;
+    }
+
+    .news-container .news-item {
+      margin-bottom: 20px;
+    }
+
+    .news-container .news-item img {
+      border-radius: 8px;
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .news-container .news-item img.expanded {
+      transform: scale(1.2);
+    }
+
+    .news-container .news-item h2 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .news-container .news-item p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .news-container .news-item a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .news-container .news-item a:hover {
+      text-decoration: underline;
+    }
+
+    .news-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+      opacity: 0;
+    }
+
+    .news-details.show {
+      max-height: 2000px; /* กำหนดความสูงสูงสุดของรายละเอียด */
+      opacity: 1;
+    }
+
+    .news-item button {
+      background-color: #6633cc; /* สีพื้นหลังของปุ่ม */
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .news-item button:hover {
+      background-color: #4b2a8b; /* สีพื้นหลังของปุ่มเมื่อชี้เมาส์ */
+      transform: scale(1.05); /* ขยายปุ่มเล็กน้อยเมื่อชี้เมาส์ */
+    }
+  </style>
+
+  <div class="container">
+    <div class="fade-in">
+      <h1>รายละเอียดวัด</h1>
+
+      <div class="news-item">
+        <img
+          src="https://s359.kapook.com//pagebuilder/3b731f69-b779-4210-bee3-5e23f1c2a3e2.jpg"
+          alt="วัดพระธาตุเรืองรอง"
+          class="news-img"
+          id="news-img-1"
+        />
+        <h2>วัดพระธาตุเรืองรอง</h2>
+        <p>หรืออีกชื่อหนึ่งเรียกว่า วัดบ้านสร้างเรือง</p>
+        <p>ที่ตั้ง : ตำบลหญ้าปล้อง อำเภอเมืองศรีสะเกษ จังหวัดศรีสะเกษ</p>
+        <p>เวลาเปิด-ปิด : ทุกวัน ตั้งแต่เวลา 06.00-18.00 น.</p>
+        <button onclick="toggleDetails('news-1', this)">รายละเอียด</button>
+        <div class="news-details" id="news-1">
+          <p>
+            วัดศักดิ์สิทธิ์คู่จังหวัดศรีสะเกษ สร้างขึ้นเมื่อปี พ.ศ. 2525 โดย
+            หลวงปู่ธัมมา พิทักษา มีพระธาตุเรืองรอง ซึ่งเป็นศิลปะแบบพื้นบ้าน 4
+            เผ่า คือ ส่วย เขมร ลาว และเยอ ส่วนภายในพระธาตุจะมีทั้งหมด 6 ชั้น
+            โดยแต่ละชั้นจะมีการจัดแสดงงานแตกต่างกัน ได้แก่ ชั้นที่ 1
+            เป็นพิพิธภัณฑ์พื้นบ้านสี่เผ่าไทย ชั้นที่ 2-3
+            จัดแสดงนิทรรศการนิทานพื้นบ้าน และข้าวของเครื่องใช้โบราณ เช่น
+            เครื่องปั้นดินเผา เครื่องมือดักจับสัตว์ แผ่นเสียง หนังสือ อาวุธ
+            และอื่น ๆ อีกมากมาย นอกจากนี้ตามฝาผนังยังประดับด้วยภาพเขียนสวยงาม
+            ชั้นที่ 4 เป็นจุดพักผ่อนก่อนไปยังชั้นถัดไป ชั้นที่ 5
+            เป็นชั้นสำหรับทำสมาธิ และชั้นที่ 6 ชั้นสุดท้าย
+            จะเป็นที่ประดิษฐานพระบรมเกศาธาตุของพระอรหันต์
+            และยังเป็นจุดชมทิวทัศน์ที่สวยงาม
+            มองเห็นวิวของบ้านเรือนและทุ่งนาสีเขียวขจี
+            ผู้คนมักเดินทางมาสักการะพระบรมสารีริกธาติ วัดพระธาตุเรืองรอง
+            เพื่อความเป็นสิริมงคลแก่ชีวิต และชมพิพิธภัณฑ์พื้นบ้านสี่เผ่าไทย
+          </p>
+          <!-- แผนที่ Google Maps -->
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3850.858778896507!2d104.29628162385376!3d15.166098412984248!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3116fd6f908842dd%3A0x371e2ba5078396aa!2z4Lin4Lix4LiU4Lia4LmJ4Liy4LiZ4Liq4Lij4LmJ4Liy4LiH4LmA4Lij4Li34Lit4LiHKOC4nuC4o-C4sOC4mOC4suC4leC4uOC5gOC4o-C4t-C4reC4h-C4o-C4reC4hyk!5e0!3m2!1sth!2sth!4v1726594429347!5m2!1sth!2sth"
+              width="800"
+              height="600"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <img
+          src="https://s359.kapook.com//pagebuilder/cd9e5254-558b-452f-8616-ca0ef9a94519.jpg"
+          alt="ข่าว 2"
+          class="news-img"
+          id="news-img-2"
+        />
+        <h2>วัดพระธาตุสุพรรณหงส์</h2>
+        <p>
+          ที่ตั้ง : หมู่บ้านหว้าน ตำบลน้ำคำ อำเภอเมืองศรีสะเกษ จังหวัดศรีสะเกษ
+        </p>
+        <p>เวลาเปิด-ปิด : ทุกวัน ตั้งแต่เวลา 05.00-18.00 น.</p>
+        <button onclick="toggleDetails('news-2', this)">รายละเอียด</button>
+        <div class="news-details" id="news-2">
+          <p>
+            วัดสวยแห่งแดนอีสานใต้ บรรยากาศร่มรื่น มีพระอุโบสถที่งดงามแปลกตา
+            โดยจะเป็นพระอุโบสถที่อยู่บนเรือสุพรรณหงส์จำลอง
+            ตั้งอยู่โดดเด่นกลางสระน้ำ ขนาดกว้าง 5 เมตร ยาว 13.60 เมตร
+            หลังคาทรงจัตุรมุข 3 ชั้น
+            มียอดมณฑปกลางอุโบสถเพื่อบรรจุพระบรมสารีริกธาตุ
+            นอกจากนี้บริเวณวัดยังมีจุดทำบุญ ให้อาหารปลา
+            รวมทั้งมีพื้นที่สำหรับพักผ่อนหย่อนใจ
+            วัดแห่งนี้นับเป็นอีกหนึ่งวัดที่มีความสวยงามและเป็นแหล่งท่องเที่ยวที่ได้รับความนิยม
+            จนคนทั่วไปต่างพากันมากราบไหว้ขอพรไม่ขาดสาย
+          </p>
+          <!-- แผนที่ Google Maps -->
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3850.3466711154!2d104.29372107385431!3d15.194183162271264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3116fd192d5a2793%3A0x58ef688410a1625!2z4Lin4Lix4LiU4Lie4Lij4Liw4LiY4Liy4LiV4Li44Liq4Li44Lie4Lij4Lij4LiT4Lir4LiH4Liq4LmMICjguKfguLHguJTguJrguYnguLLguJnguKvguKfguYnguLLguJkp!5e0!3m2!1sth!2sth!4v1726595633843!5m2!1sth!2sth"
+            width="800"
+            height="600"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <img
+          src="https://s359.kapook.com//pagebuilder/60657395-b0d0-498b-8aa7-4a4ca2138336.jpg"
+          alt="ข่าว 3"
+          class="news-img"
+          id="news-img-3"
+        />
+        <h2>วัดหนองตะเคียน</h2>
+        <p>ที่ตั้ง : ตำบลจาน อำเภอเมืองศรีสะเกษ จังหวัดศรีสะเกษ</p>
+        <p>เวลาเปิด-ปิด : ทุกวัน ตั้งแต่เวลา 06.00-18.00 น.</p>
+        <button onclick="toggleDetails('news-3', this)">รายละเอียด</button>
+        <div class="news-details" id="news-3">
+          <p>
+            วัดที่มีความสำคัญทางประวัติศาสตร์
+            สร้างตามแบบผสมผสานศิลปะขอมและล้านนา
+            มีความเก่าแก่มากโดยสร้างขึ้นตั้งแต่สมัยกรุงศรีอยุธยาภายในพระอุโบสถจะประดิษฐานพระศรีอริยเมตไตรย
+            บริเวณข้างพระอุโบสถจะมีลานพระพุทธรูปปางสมาธิ 28 องค์
+            ตั้งเป็นแนวรูปสี่เหลี่ยมดูสวยงาม
+            รวมถึงมีอนุสาวรีย์สมเด็จพระเจ้าตากสินมหาราชให้ประชาชนได้ไปไหว้สักการะขอพรกันอีกด้วย
+
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3854.1211108691123!2d104.41511397384983!3d14.985980767527872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3116e703ad72d983%3A0xf44a0894b28da255!2z4Lin4Lix4LiU4Lir4LiZ4Lit4LiH4LiV4Liw4LmA4LiE4Li14Lii4LiZ!5e0!3m2!1sth!2sth!4v1726596918415!5m2!1sth!2sth"
+              width="800"
+              height="600"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </p>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <img
+          src="https://ssk.onab.go.th/th/file/get/file/2022083110bd3792c199bc242300eda04c74c684111722.jpg"
+          alt="ข่าว 4"
+          class="news-img"
+          id="news-img-4"
+        />
+        <h2>วัดมหาพุทธาราม</h2>
+        <p>ที่ตั้ง : ตำบลเมืองใต้ อำเภอเมืองศรีสะเกษ จังหวัดศรีสะเกษ</p>
+        <p>เวลาเปิด-ปิด : ทุกวัน ตั้งแต่เวลา 06.00-18.00 น.</p>
+        <button onclick="toggleDetails('news-4', this)">รายละเอียด</button>
+        <div class="news-details" id="news-4">
+          <p>
+            วัดเก่าแก่คู่บ้านคู่เมืองศรีสะเกษ ตั้งอยู่ใจกลางเมือง
+            ภายในวิหารเป็นที่ประดิษฐานพระพุทธรูปคู่บ้านคู่เมืองและเป็นที่เคารพสักการะของชาวศรีสะเกษ
+            นั่นก็คือ หลวงพ่อโต พระพุทธรูปองค์ใหญ่ปางมารวิชัย สูงจากฐานถึงยอดเกศ
+            6.85 เมตร หน้าตักกว้าง 3.50 เมตร ซึ่งเป็นพระพุทธรูปศิลาจำหลัก
+            สันนิษฐานว่าเป็นพระพุทธรูปสมัยขอม มีอายุกว่า 1,000 ปีเลยทีเดียว
+            และยังมีภาพจิตรกรรมฝาผนังที่สวยงามบอกเล่าเรื่องราวพุทธประวัติต่าง ๆ
+            ให้ชม ผู้คนนิยมเดินทางมาไหว้พระขอพร
+            ขอให้ประสบความสำเร็จและโชคดีกันถ้วนหน้า
+
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3851.7297826526788!2d104.3226798238526!3d15.118214264197096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3116e2d9a32e7c11%3A0xc5e0e071cf844a54!2z4Lin4Lix4LiU4Lih4Lir4Liy4Lie4Li44LiX4LiY4Liy4Lij4Liy4LihICjguKfguLHguJTguJ7guKPguLDguYLguJUp!5e0!3m2!1sth!2sth!4v1726597656279!5m2!1sth!2sth"
+              width="800"
+              height="600"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </p>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <img
+          src="https://s359.kapook.com//pagebuilder/d2842a74-b566-4a26-b8e6-baf025af2bdc.jpg"
+          alt="ข่าว 5"
+          class="news-img"
+          id="news-img-5"
+        />
+        <h3>วัดป่าศรีมงคลรัตนาราม</h3>
+        <p>ที่ตั้ง : ตำบลโคกจาน อำเภออุทุมพรพิสัย จังหวัดศรีสะเกษ</p>
+        <p>เวลาเปิด-ปิด : ทุกวัน ตั้งแต่เวลา 07.30-17.30 น.</p>
+        <button onclick="toggleDetails('news-5', this)">รายละเอียด</button>
+        <div class="news-details" id="news-5">
+          <p>
+            วัดสวยศรีสะเกษ สถานที่ปฏิบัติธรรมกัมมัฏฐานอันสงบ ร่มเย็น
+            และเป็นสถานที่ท่องเที่ยวเชิงพระพุทธศาสนาที่สวยงาม ไฮไลต์ของที่นี่คือ
+            ถ้ำนาคาธิบดี หรือ ถ้ำพญานาค ที่มีการออกแบบให้กลายเป็น วังบาดาล
+            มีหินงอก-หินย้อยจำลอง ภายในถ้ำยังประดิษฐานพระพุทธรูปหยกขาว
+            และรูปปั้นพญานาคขนาดใหญ่ที่งดงามน่าเกรงขาม
+            นอกจากนี้ยังมีการประดับไฟหลากสีสัน
+            นักท่องเที่ยวส่วนใหญ่มักเดินทางมาไหว้พระขอพร
+            รวมทั้งชื่นชมความสวยงามภายในวัดและถ้ำพญานาคกัน
+
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3854.4326626842962!2d104.10098736912992!3d14.968668836077699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311717f6d48e5f51%3A0x6d3f981ce271bce0!2z4Lin4Lix4LiU4Lib4LmI4Liy4Lio4Lij4Li14Lih4LiH4LiE4Lil4Lij4Lix4LiV4LiZ4Liy4Lij4Liy4LihICjguJgp!5e0!3m2!1sth!2sth!4v1726597822757!5m2!1sth!2sth"
+              width="800"
+              height="600"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </p>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <img
+          src="https://s359.kapook.com//pagebuilder/4c50122d-554c-40c2-8c68-ba4efac22b0b.jpg"
+          alt="ข่าว 6"
+          class="news-img"
+          id="news-img-6"
+        />
+        <h4>วัดไพรพัฒนา</h4>
+        <p>ตำบลไพรพัฒนา อำเภอภูสิงห์ จังหวัดศรีสะเกษ</p>
+        <p>เวลาเปิด-ปิด : ทุกวัน ตั้งแต่เวลา 06.00-18.00 น.</p>
+        <button onclick="toggleDetails('news-6', this)">รายละเอียด</button>
+        <div class="news-details" id="news-6">
+          <p>
+            วัดแห่งนี้เคยเป็นที่พำนักของหลวงปู่สรวง พระเกจิอาจารย์แห่งอีสานใต้
+            ที่ชอบช่วยเหลือผู้ตกทุกข์ได้ยาก จนเป็นที่รักและศรัทธาของชาวบ้าน
+            ซึ่งภายหลังจากที่หลวงปู่ละสังขารไป สังขารของหลวงปู่ก็ไม่เน่าเปื่อย
+            ลูกศิษย์จึงนำไปบรรจุไว้ในโลงแก้ว
+            เพื่อให้คนทั่วไปได้มากราบไหว้เพื่อความเป็นสิริมงคล
+            จุดไฮไลต์ที่น่าสนใจภายในวัดก็คือ มณฑปปราสาทหลวงปู่สรวง
+            ที่สร้างด้วยอิฐสีแดงทั้งหมด ผสมผสานกับสถาปัตยกรรมแบบขอม
+            ตั้งเด่นเป็นสง่าชวนสะดุดตาต่อผู้คนเป็นอย่างมาก
+
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3863.324268279516!2d104.06893437383896!3d14.466060080358988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3110ce4b68e2c457%3A0x5d5fcdecdbfd45d3!2z4Lin4Lix4LiU4LmE4Lie4Lij4Lie4Lix4LiS4LiZ4LiyICjguKvguKXguKfguIfguJvguLnguYjguKrguKPguKfguIcp!5e0!3m2!1sth!2sth!4v1726598802061!5m2!1sth!2sth"
+              width="800"
+              height="600"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </p>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <img
+          src="https://s359.kapook.com//pagebuilder/3f74f9b6-b2fc-4065-b91e-3591ba18a244.jpg"
+          alt="ข่าว 7"
+          class="news-img"
+          id="news-img-7"
+        />
+        <h3>วัดป่ามหาเจดีย์แก้ว</h3>
+        <p>ที่ตั้ง : ตำบลโนนสูง อำเภอขุนหาญ จังหวัดศรีสะเกษ</p>
+        <p>เวลาเปิด-ปิด : ทุกวัน ตั้งแต่เวลา 06.00-18.00 น.</p>
+        <button onclick="toggleDetails('news-7', this)">รายละเอียด</button>
+        <div class="news-details" id="news-7">
+          <p>
+            วัดป่ามหาเจดีย์แก้ว หรือ วัดล้านขวด สร้างเมื่อปี พ.ศ. 2527 โดย
+            พระครูวิเวกธรรมาจารย์ หรือ หลวงปู่หลอด ซึ่งสิ่งก่อสร้างต่าง ๆ
+            ภายในวัดตั้งแต่ทางเข้าวัด ซุ้มกำแพง ประตูโบสถ์ หอระฆัง กุฏิ
+            เมรุเผาศพ ไปจนถึงห้องน้ำ
+            ถูกตกแต่งประดับประดาด้วยขวดแก้วหลากสีสันและหลายรูปแบบ รวม ๆ
+            กันมากกว่า 1.5 ล้านใบเลยทีเดียว จึงทำให้วัดแห่งนี้ถูกเรียกว่า
+            วัดล้านขวด นั่นเอง
+            ภายในวัดยังมีศาลากลางน้ำที่ประดับตกแต่งด้วยขวดสีเขียวทั้งหลัง
+            ด้านในศาลาประดิษฐานพระพุทธรูปหยกขาว
+            เพื่อให้ผู้มีจิตศรัทธาได้เดินทางมาสักการบูชาและชื่นชมความสวยงามของสิ่งก่อสร้างภายในวัด
+
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.660350802443!2d104.41666617384209!3d14.61841437664282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3116d3041a6b5dcd%3A0xf684803889d57888!2z4Lin4Lix4LiU4Lib4LmI4Liy4Lih4Lir4Liy4LmA4LiI4LiU4Li14Lii4LmM4LmB4LiB4LmJ4LinICjguKfguLHguJTguKXguYnguLLguJnguILguKfguJQp!5e0!3m2!1sth!2sth!4v1726598921484!5m2!1sth!2sth"
+              width="800"
+              height="600"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </p>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <img
+          src="https://s359.kapook.com//pagebuilder/8ef34c0f-df11-451f-b60b-c6873db07501.jpg"
+          alt="ข่าว 8"
+          class="news-img"
+          id="news-img-8"
+        />
+        <h3>วัดศรีบึงบูรพ์</h3>
+        <p>ที่ตั้ง : ตำบลบึงบูรพ์ อำเภอบึงบูรพ์ จังหวัดศรีสะเกษ</p>
+        <p>เวลาเปิด-ปิด : ทุกวัน ตั้งแต่เวลา 06.00-18.00 น.</p>
+        <button onclick="toggleDetails('news-8', this)">รายละเอียด</button>
+        <div class="news-details" id="news-8">
+          <p>
+            อีกหนึ่งวัดที่เป็นแหล่งยึดเหนี่ยวจิตใจของชาวศรีสะเกษ
+            ตั้งอยู่ริมลำน้ำห้วยทับทัน บ้านโนนสาวสวย ภายในวัดบรรยากาศเงียบสงบ
+            พระอุโบสถมีลักษณะสูงโปร่ง เป็นศิลปะสมัยอยุธยาผสมรัตนโกสินทร์
+            รวมทั้งเป็นสถานที่บำเพ็ญเพียรภาวนาของ พระอาจารย์ศรีจันทร์สาโร
+            พระเกจิที่ชาวบ้านเลื่อมใสศรัทธา
+            และยังเป็นที่ประดิษฐานของพระพุทธชินราชจำลององค์ที่ 2 ของประเทศไทย
+            ที่นี่จึงนับเป็นวัดสวยแห่งอีสานใต้
+            ที่น่าไปกราบไหว้สักการะให้ได้สักครั้งเลยทีเดียว
+
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3847.6475966075645!2d104.05080476918224!3d15.341374825911819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3117a782f212117d%3A0x210a4e9173f06cd3!2z4Lin4Lix4LiU4Lio4Lij4Li14Lia4Li24LiH4Lia4Li54Lij4Lie4LmM!5e0!3m2!1sth!2sth!4v1726599012719!5m2!1sth!2sth"
+              width="800"
+              height="600"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </p>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <img
+          src="https://s359.kapook.com//pagebuilder/34f0c7a1-b1a6-4202-97ee-06c5f115b595.jpg"
+          alt="ข่าว 9"
+          class="news-img"
+          id="news-img-9"
+        />
+        <h2>วัดสระกำแพงใหญ่</h2>
+        <p>ที่ตั้ง : ตำบลสระกำแพงใหญ่ อำเภออุทุมพรพิสัย จังหวัดศรีสะเกษ</p>
+        <p>เวลาเปิด-ปิด : ทุกวัน ตั้งแต่เวลา 06.00-18.00 น.</p>
+        <button onclick="toggleDetails('news-9', this)">รายละเอียด</button>
+        <div class="news-details" id="news-9">
+          <p>
+            ปราสาทของวัดสระกำแพงใหญ่เป็นศิลปะแบบขอม มีอายุกว่า 1,000 ปี
+            ซึ่งเป็นปราสาทหินขนาดใหญ่และสมบูรณ์ที่สุดในจังหวัด
+            ภายในวัดมีสรีระของ หลวงปู่เครื่อง สุภัทโท อดีตเจ้าอาวาส
+            ซึ่งเป็นเกจิชื่อดังของจังหวัดศรีสะเกษ
+            นอกจากนี้ยังมีสิ่งศักดิ์สิทธิ์ต่าง ๆ ทั้งอุโบสถพญานาค
+            วิหารพระโพธิสัตว์กวนอิม วิหารหลวงพ่อนาค 1,000 ปี
+            รูปหล่อหลวงปู่เครื่ององค์ใหญ่ ถ้ำเงิน-ถ้ำทอง
+            และพิพิธภัณฑ์วัดสระกำแพงใหญ่ เป็นต้น
+            ทำให้มีประชาชนที่มีความเลื่อมใสศรัทธายังคงแวะเวียนมาไหว้พระขอพรที่วัดแห่งนี้กันอยู่เสมอ
+
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3852.02887773639!2d104.12587657385231!3d15.101737064613642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31171b7317ff1fb7%3A0x9ed9992091dfcaf!2z4Lin4Lix4LiU4Liq4Lij4Liw4LiB4Liz4LmB4Lie4LiH4LmD4Lir4LiN4LmI!5e0!3m2!1sth!2sth!4v1726599080052!5m2!1sth!2sth"
+              width="800"
+              height="600"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDetails(id, button) {
+      const details = document.getElementById(id);
+      const img = details.previousElementSibling;
+
+      if (details.classList.contains("show")) {
+        details.classList.remove("show");
+        img.classList.remove("expanded");
+        button.textContent = "รายละเอียด";
+      } else {
+        details.classList.add("show");
+        img.classList.add("expanded");
+        button.textContent = "ปิด";
+      }
+    }
+  </script>
+</div>
+{% endblock content %}
