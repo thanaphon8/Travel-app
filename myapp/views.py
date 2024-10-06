@@ -17,3 +17,11 @@ def contactPage(request):
 
 def travelPage(request):
     return render(request, 'travel.html')
+
+
+def recommend(request):
+    return render(request, 'recommend.html')
+
+
+def option(request):
+    return render(request, 'option.html')
