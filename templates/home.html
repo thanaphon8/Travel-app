@@ -1,224 +1,179 @@
-{% extends "nav.html" %} {% block content %} {% load static %}
-<title>Latest Products</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 0;
-    padding-top: 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: auto; /* Adjusted height */
-  }
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  .title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 150px;
-  }
-  .products {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .product {
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 45%;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .product:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  .product img {
-    width: 100%;
-    border-bottom: 1px solid #ffffff;
-    transition: transform 0.3s;
-  }
-  .product-content {
-    padding: 20px;
-  }
-  .product-content h2 {
-    font-size: 18px;
-    margin: 0 0 5px 0;
-  }
-  .product-content p {
-    font-size: 12px;
-    margin: 5px 0;
-    color: #ffffff;
-  }
-  button {
-    background-color: #ff9900;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 15px 30px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: transform 0.3s;
-  }
-  button:hover {
-    transform: scale(1.1);
-  }
+{% extends "nav.html" %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Latest Products</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        margin: 0;
+        padding: 0;
+        padding-top: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto; /* Adjusted height */
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 150px;
+      }
+      .products {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .product {
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 45%;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .product:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+      .product img {
+        width: 100%;
+        border-bottom: 1px solid #ffffff;
+        transition: transform 0.3s;
+      }
+      .product-content {
+        padding: 20px;
+      }
+      .product-content h2 {
+        font-size: 18px;
+        margin: 0 0 5px 0;
+      }
+      .product-content p {
+        font-size: 12px;
+        margin: 5px 0;
+        color: #ffffff;
+      }
+      button {
+        background-color: #ff9900;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 15px 30px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+      button:hover {
+        transform: scale(1.1);
+      }
 
-  /* About Section */
-  .about {
-    margin-top: 250px;
-    text-align: center;
-  }
-  .about h2 {
-    color: white; /* Change the color of the title to white */
-  }
-  .team {
-    display: flex;
-    flex-wrap: wrap; /* ให้สมาชิกในทีมเรียงกันลงมาได้ */
-    justify-content: center; /* จัดกลาง */
-  }
+      /* About Section */
+      .about {
+        margin-top: 250px;
+        text-align: center;
+      }
+      .about h2 {
+        color: white; /* Change the color of the title to white */
+      }
+      .team {
+        display: flex;
+        flex-wrap: wrap; /* ให้สมาชิกในทีมเรียงกันลงมาได้ */
+        justify-content: center; /* จัดกลาง */
+      }
+      .team-member {
+        display: inline-block;
+        width: 20%; /* สี่สมาชิกข้างเคียง */
+        margin: 9px;
+        text-align: center;
+      }
+      .team-member img {
+        border-radius: 50%;
+        width: 80%; /* ขนาดภาพที่ตอบสนอง */
+        height: auto;
+      }
+      .team-member h3 {
+        font-size: 14px;
+        margin: 10px 0 5px 0;
+        color: #ffffff; /* เปลี่ยนสีข้อความเป็นขาว */
+      }
+      .team-member p {
+        font-size: 14px;
+        color: #ffffff; /* สีข้อความสำหรับคำอธิบายเป็นขาว */
+      }
 
-  .team-member {
-    display: inline-block;
-    width: 20%; /* สี่สมาชิกข้างเคียง */
-    margin: 9px;
-    text-align: center;
-  }
+      @media (max-width: 768px) {
+        .team {
+          flex-direction: column; /* เรียงในแนวตั้งสำหรับมือถือ */
+          align-items: center;
+        }
+        .team-member {
+          width: 100%; /* ความกว้างเต็มในมือถือ */
+        }
+      }
+    </style>
+  </head>
 
-  .team-member img {
-    border-radius: 50%;
-    width: 80%; /* ขนาดภาพที่ตอบสนอง */
-    height: auto;
-  }
+  <body>
+    <div class="container">
+      <div class="title">Latest Products</div>
 
-  .team-member h3 {
-    font-size: 14px;
-    margin: 10px 0 5px 0;
-    color: #ffffff; /* เปลี่ยนสีข้อความเป็นขาว */
-  }
-
-  .team-member p {
-    font-size: 14px;
-    color: #ffffff; /* สีข้อความสำหรับคำอธิบายเป็นขาว */
-  }
-
-  @media (max-width: 768px) {
-    .team {
-      flex-direction: column; /* เรียงในแนวตั้งสำหรับมือถือ */
-      align-items: center;
-    }
-
-    .team-member {
-      width: 100%; /* ความกว้างเต็มในมือถือ */
-    }
-  }
-  /* About Section */
-  .about {
-    margin-top: 250px;
-    text-align: center;
-  }
-
-  .team {
-    display: flex;
-    flex-wrap: wrap; /* ให้สมาชิกในทีมเรียงกันลงมาได้ */
-    justify-content: center; /* จัดกลาง */
-  }
-
-  .team-member {
-    display: inline-block;
-    width: 20%; /* สี่สมาชิกข้างเคียง */
-    margin: 9px;
-    text-align: center;
-  }
-
-  .team-member img {
-    border-radius: 50%;
-    width: 80%; /* ขนาดภาพที่ตอบสนอง */
-    height: auto;
-  }
-
-  .team-member h3 {
-    font-size: 14px;
-    margin: 10px 0 5px 0;
-    color: #ffffff; /* เปลี่ยนสีข้อความเป็นขาว */
-  }
-
-  .team-member p {
-    font-size: 14px;
-    color: #ffffff; /* สีข้อความสำหรับคำอธิบายเป็นขาว */
-  }
-
-  @media (max-width: 768px) {
-    .team {
-      flex-direction: column; /* เรียงในแนวตั้งสำหรับมือถือ */
-      align-items: center;
-    }
-
-    .team-member {
-      width: 100%; /* ความกว้างเต็มในมือถือ */
-    }
-  }
-</style>
-
-<body>
-  <div class="container">
-    <div class="title"></div>
-
-    <div class="products">
-      <!-- Your product items go here -->
-    </div>
-
-    <div style="text-align: center; margin-top: 20px">
-      <a href="option" style="text-decoration: none">
-        <button>Go Travel Now</button>
-      </a>
-    </div>
-
-    <!-- About Section -->
-    <div class="about">
-      <h2>ผู้จัดทำ</h2>
-      <div class="team-member">
-        <img
-          src="https://i.pinimg.com/736x/7f/61/42/7f61428be7ec2f97dfef82054ffddd5a.jpg"
-          alt="Member 1"
-        />
-        <h3>นายธนาพนธ์ แต้มมาก</h3>
-        <p>ID:6612732112</p>
+      <div class="products">
+        <!-- Your product items go here -->
       </div>
-      <div class="team-member">
-        <img
-          src="https://i.pinimg.com/736x/ce/43/bb/ce43bbf87a43d883ddd372d7af8f654c.jpg"
-          alt="Member 2"
-        />
-        <h3>วิมลชัย ด่านประสิทธิ์ผล</h3>
-        <p>ID:6612732126</p>
+
+      <div style="text-align: center; margin-top: 20px">
+        <a href="option" style="text-decoration: none">
+          <button>Go Travel Now</button>
+        </a>
       </div>
-      <div class="team-member">
-        <img
-          src="https://i.pinimg.com/736x/eb/a9/c4/eba9c4566aa85ff50eb70725b1d05978.jpg"
-          alt="Member 3"
-        />
-        <h3>นายธนาสุข เครือศรี</h3>
-        <p>ID:6612732113</p>
-      </div>
-      <div class="team-member">
-        <img
-          src="https://i.pinimg.com/736x/80/ee/79/80ee79efd77edbd94433ca16511d4e24.jpg"
-          alt="Member 4"
-        />
-        <h3>นายเกียรติศักดิ์ ช่างทอง</h3>
-        <p>ID:6612732104</p>
+
+      <!-- About Section -->
+      <div class="about">
+        <h2>ผู้จัดทำ</h2>
+        <div class="team-member">
+          <img
+            src="https://i.pinimg.com/736x/7f/61/42/7f61428be7ec2f97dfef82054ffddd5a.jpg"
+            alt="Member 1"
+          />
+          <h3>นายธนาพนธ์ แต้มมาก</h3>
+          <p>ID:6612732112</p>
+        </div>
+        <div class="team-member">
+          <img
+            src="https://i.pinimg.com/736x/ce/43/bb/ce43bbf87a43d883ddd372d7af8f654c.jpg"
+            alt="Member 2"
+          />
+          <h3>วิมลชัย ด่านประสิทธิ์ผล</h3>
+          <p>ID:6612732126</p>
+        </div>
+        <div class="team-member">
+          <img
+            src="https://i.pinimg.com/736x/eb/a9/c4/eba9c4566aa85ff50eb70725b1d05978.jpg"
+            alt="Member 3"
+          />
+          <h3>นายธนาสุข เครือศรี</h3>
+          <p>ID:6612732113</p>
+        </div>
+        <div class="team-member">
+          <img
+            src="https://i.pinimg.com/736x/80/ee/79/80ee79efd77edbd94433ca16511d4e24.jpg"
+            alt="Member 4"
+          />
+          <h3>นายเกียรติศักดิ์ ช่างทอง</h3>
+          <p>ID:6612732104</p>
+        </div>
       </div>
     </div>
-  </div>
-</body>
-{% endblock content %}
+  </body>
+  {% endblock content %}
+</html>
