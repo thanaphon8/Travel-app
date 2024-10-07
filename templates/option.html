@@ -1,0 +1,634 @@
+{% extends "nav.html" %} {% block content %}
+<div class="news-container">
+  <style>
+    body {
+      background-color: #ffffff; /* สีพื้นหลังของทั้งหน้า */
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeInAnimation 1s ease-in forwards;
+    }
+
+    @keyframes fadeInAnimation {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .news-container {
+      background-color: #ffffff; /* สีพื้นหลังของคอนเทนเนอร์ */
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      margin: 20px auto;
+    }
+
+    .news-container h1 {
+      margin: 0 0 20px;
+      font-size: 28px;
+      color: #333;
+      text-align: center;
+    }
+
+    .news-container .news-item {
+      margin-bottom: 20px;
+    }
+
+    .news-container .news-item img {
+      border-radius: 8px;
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .news-container .news-item img.expanded {
+      transform: scale(1.2);
+    }
+
+    .news-container .news-item h2 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .news-container .news-item p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .news-container .news-item a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .news-container .news-item a:hover {
+      text-decoration: underline;
+    }
+
+    .news-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+      opacity: 0;
+    }
+
+    .news-details.show {
+      max-height: 2000px; /* กำหนดความสูงสูงสุดของรายละเอียด */
+      opacity: 1;
+    }
+
+    .news-item button {
+      background-color: #002d80; /* สีพื้นหลังของปุ่ม */
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .news-item button:hover {
+      background-color: #002d80; /* สีพื้นหลังของปุ่มเมื่อชี้เมาส์ */
+      transform: scale(1.05); /* ขยายปุ่มเล็กน้อยเมื่อชี้เมาส์ */
+    }
+
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: #f0f8ff;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #4caf50;
+    }
+
+    label {
+      font-size: 1.2em;
+      margin-right: 10px;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 1em;
+      border: 2px solid #4caf50;
+      border-radius: 5px;
+      outline: none;
+      transition: border-color 0.3s;
+      margin-bottom: 20px;
+    }
+
+    select:focus {
+      border-color: #45a049;
+    }
+
+    .places {
+      display: none; /* ซ่อนเริ่มต้น */
+      margin-top: 20px;
+      padding: 20px; /* เพิ่ม padding */
+      border: 2px solid #4caf50; /* ปรับความหนา */
+      border-radius: 5px;
+      background-color: #e7f9e7;
+      width: 100%;
+      max-width: 600px; /* ขยายความกว้าง */
+      max-height: 400px; /* ขยายความสูงสูงสุด */
+      overflow-y: auto; /* ทำให้สามารถเลื่อนลงได้ */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
+    }
+
+    .places h2 {
+      margin: 0;
+      font-size: 1.5em;
+      color: #333;
+    }
+
+    .places ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .places li {
+      padding: 10px 0; /* เพิ่ม padding ให้กับรายการ */
+    }
+  </style>
+
+  <div class="container">
+    <h1>เลือกสถานที่เที่ยว</h1>
+    <label for="district-select">กรุณาเลือกอำเภอ:</label>
+    <select id="district-select" onchange="showContent()">
+      <option value="">-- เลือกอำเภอ --</option>
+      <option value="อำเภอ1">อำเภอเมือง</option>
+      <option value="อำเภอ2">อำเภอไพรบึง</option>
+      <option value="อำเภอ3">อำเภออุทุมพรพิสัย</option>
+      <option value="อำเภอ4">อำเภอกันทรลักษ์</option>
+      <option value="อำเภอ5">อำเภอกันทรารมย์</option>
+      <option value="อำเภอ6">อำเภอภูสิงห์</option>
+      <option value="อำเภอ7">อำเภอขุนหาญ</option>
+      <option value="อำเภอ8">อำเภอบึงบูรพ์</option>
+      <option value="อำเภอ9">อำเภอปรางค์กู่</option>
+    </select>
+    <div class="places" id="places-list" style="display: none">
+      <section id="portfolio" class="bg-dark text-light text-center">
+        <div class="container">
+          <h2>สถานที่เเนะนำ</h2>
+
+          <div class="district อำเภอ1" style="display: none">
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2022/05/24/ad571760-db2d-11ec-b6a5-095d75e15c39_webp_original.jpg"
+                alt="Project 1"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>วัดพระธาตุสุพรรณหงส์</h4>
+              <p>รายละเอียดเกี่ยวกับโปรเจค 1</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2022/03/17/3b670c10-a5b7-11ec-96f7-8f8b27564a4d_webp_original.jpg"
+                alt="Project 2"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>สวนสมเด็จพระศรีนครินทร์</h4>
+              <p>รายละเอียดเกี่ยวกับโปรเจค 2</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://i.pinimg.com/736x/5f/07/28/5f072853f1274947963c247c93a4aca4.jpg"
+                alt="Project 3"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>วัดพระธาตุเรืองรอง</h4>
+              <p>รายละเอียดเกี่ยวกับโปรเจค 3</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2020/01/22/9b9e5240-3d00-11ea-89cf-b7b75043f4d2_original.JPG"
+                alt="Project 4"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>เกาะกลางน้ำ</h4>
+              <p>รายละเอียดเกี่ยวกับโปรเจค 4</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2022/05/24/e3766b10-db2e-11ec-bc2e-5f12c5281c89_webp_original.jpg"
+                alt="Project 5"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>หอศรีลำดวนเฉลิมพระเกียรติ</h4>
+              <p>รายละเอียดเกี่ยวกับโปรเจค 5</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2022/05/24/40524790-db30-11ec-96a6-1b3ed30aeddd_webp_original.jpg"
+                alt="Project 6"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>วัดบ้านหนองตะเคียน</h4>
+              <p>รายละเอียดเกี่ยวกับโปรเจค 6</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://i.pinimg.com/736x/1c/f5/a4/1cf5a410b98f6293a1ad4151198c6515.jpg"
+                alt="Project 7"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>Sisaket Aquarium</h4>
+              <p>รายละเอียดเกี่ยวกับโปรเจค 7</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2022/05/24/e4af4e50-db30-11ec-bc2e-5f12c5281c89_webp_original.jpg"
+                alt="Project 8"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>ตึกขุนอำไพพาณิชย์</h4>
+              <p>รายละเอียดเกี่ยวกับโปรเจค 8</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://i.pinimg.com/736x/f5/16/0d/f5160d051fdde3d95757883ced8881c2.jpg"
+                alt="Project 9"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>วัดมหาพุทธาราม</h4>
+              <p>รายละเอียดเกี่ยวกับโปรเจค 9</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2023/08/13/37dcdff0-39b5-11ee-8196-1d0c7c42fbef_webp_original.webp"
+                alt="Project 10"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>ศาลหลักเมืองศรีสะเกษ</h4>
+              <p>รายละเอียดเกี่ยวกับโปรเจค 10</p>
+            </div>
+          </div>
+
+          <div class="district อำเภอ2" style="display: none">
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="http://www.prasatyoe.go.th/wp-content/uploads/2024/06/1-18.jpg"
+                alt="Project 1"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>วัดปราสาทเยอเหนือ</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 1</p>
+            </div>
+          </div>
+
+          <div class="district อำเภอ3" style="display: none">
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2022/05/24/de5c1270-db2d-11ec-96a6-1b3ed30aeddd_webp_original.jpg"
+                alt="Project 1"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>ปราสาทสระกำแพงใหญ่</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 1</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2020/01/22/086ea490-3cfe-11ea-a179-25fef06e2e99_original.JPG"
+                alt="Project 2"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>ปราสาทหินสระกำแพงน้อย</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 2</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://www.phephatiew.com/wp-content/uploads/2022/01/1.%E0%B8%9B%E0%B8%81%E0%B9%80%E0%B8%A7%E0%B8%9B-1-750x450.png"
+                alt="Project 3"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>วัดป่าศรีมงคลรัตนาราม</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 3</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2022/04/26/172f8010-c52a-11ec-a5e2-a935577b0fc5_webp_original.jpg"
+                alt="Project 4"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>วัดสระกำแพงใหญ่</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 4</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2023/09/12/b4e4bfb0-5114-11ee-9c06-bb143a43f621_webp_original.webp"
+                alt="Project 5"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>สถานีรถไฟอุทุมพรพิสัย</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 5</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://pukmudmuangthai.com/wp-content/uploads/2020/10/%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9B%E0%B9%88%E0%B8%B2%E0%B9%80%E0%B8%A7%E0%B8%A8%E0%B8%B8%E0%B8%A7%E0%B8%B1%E0%B8%99-63.jpg"
+                alt="Project 6"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>วัดป่าเวฬุวัน</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 6</p>
+            </div>
+          </div>
+
+          <div class="district อำเภอ4" style="display: none">
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2020/01/22/c1d665a0-3cfc-11ea-89cf-b7b75043f4d2_original.JPG"
+                alt="Project 1"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>ผามออีแดง</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 1</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2020/01/22/e1f9a180-3cfc-11ea-a179-25fef06e2e99_original.JPG"
+                alt="Project 2"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>น้ำตกถ้ำขุนศรี</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 2</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2023/09/12/1566f9d0-5114-11ee-a3db-71c4f741bb87_webp_original.webp"
+                alt="Project 3"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>ปราสาทโดนตวล</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 3</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2023/09/12/49b09890-5114-11ee-a3db-71c4f741bb87_webp_original.webp"
+                alt="Project 4"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>น้ำตกวังใหญ่</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 3</p>
+            </div>
+          </div>
+
+          <div class="district อำเภอ5" style="display: none">
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://i.pinimg.com/736x/13/de/e4/13dee4b7f4fa074e505e5a90615d5838.jpg"
+                alt="Project 1"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>หาดนางเหงา</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 1</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://scontent.fbkk22-7.fna.fbcdn.net/v/t1.6435-9/33058676_1969042476441488_6703583220430012416_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=13d280&_nc_ohc=kAGyl1-PP6oQ7kNvgHNutCh&_nc_ht=scontent.fbkk22-7.fna&_nc_gid=AfPb03OVbuS6vW9DK5QY5om&oh=00_AYAtkdX6lg_8XrCqiHUMeZfYRcX2j0Oz_nq6D9Uqderizw&oe=672A8B51"
+                alt="Project 2"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>วัดบ้านจาน</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 2</p>
+            </div>
+          </div>
+
+          <div class="district อำเภอ6" style="display: none">
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2020/01/22/206a7210-3d01-11ea-89cf-b7b75043f4d2_original.JPG"
+                alt="Project 1"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>วัดไพรพัฒนา</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 1</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://www.unseennewchapters.com/img/sisaket-02.8f3843b0.jpg"
+                alt="Project 2"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>จุดชมวิวพญากูปรี</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 2</p>
+            </div>
+          </div>
+
+          <div class="district อำเภอ7" style="display: none">
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/9c/77/09/caption.jpg?w=900&h=500&s=1"
+                alt="Project 1"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>วัดป่ามหาเจดีย์แก้ว หรือ วัดล้านขวด</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 1</p>
+            </div>
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2021/12/16/c272f2b0-5e3a-11ec-9189-991532356215_webp_original.jpg"
+                alt="Project 2"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>น้ำตกสำโรงเกียรติ</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 2</p>
+            </div>
+          </div>
+
+          <div class="district อำเภอ8" style="display: none">
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://i.pinimg.com/736x/d6/89/12/d689125a54c05ddb118ba06a2fb5ceff.jpg"
+                alt="Project 1"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>วัดศรีบึงบูรพ์</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 1</p>
+            </div>
+          </div>
+
+          <div class="district อำเภอ9" style="display: none">
+            <div
+              class="col-md-4 portfolio-item"
+              style="border: 2px solid #000; padding: 10px; border-radius: 5px"
+            >
+              <img
+                src="https://cms.dmpcdn.com/travel/2020/01/22/bcfc9110-3cfe-11ea-a179-25fef06e2e99_original.JPG"
+                alt="Project 1"
+                style="width: 100%; border-radius: 5px"
+              />
+              <h4>ปราสาทปรางค์กู่</h4>
+              <p>รายละเอียดเกี่ยวกับสถานที่ 1</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      function showContent() {
+        const selectedDistrict =
+          document.getElementById("district-select").value;
+        const placesList = document.getElementById("places-list");
+
+        hideAllDistricts(); // ซ่อนทุกอำเภอ
+        if (selectedDistrict) {
+          showSelectedDistrict(selectedDistrict); // แสดงอำเภอที่เลือก
+          placesList.style.display = "block"; // แสดง container ของสถานที่
+        } else {
+          placesList.style.display = "none"; // ซ่อน container หากไม่มีการเลือก
+        }
+      }
+
+      function hideAllDistricts() {
+        const allDistricts = document.querySelectorAll(".district");
+        allDistricts.forEach((district) => {
+          district.style.display = "none"; // ซ่อนอำเภอ
+        });
+      }
+
+      function showSelectedDistrict(selectedDistrict) {
+        const selectedContent = document.querySelector(
+          `.district.${selectedDistrict}`
+        );
+        if (selectedContent) {
+          selectedContent.style.display = "block"; // แสดงอำเภอที่เลือก
+        }
+      }
+    </script>
+    <script>
+      function showContent() {
+        const selectedDistrict =
+          document.getElementById("district-select").value;
+        const placesList = document.getElementById("places-list");
+
+        hideAllDistricts(); // ซ่อนทุกอำเภอ
+        if (selectedDistrict) {
+          showSelectedDistrict(selectedDistrict); // แสดงอำเภอที่เลือก
+          placesList.style.display = "block"; // แสดง container ของสถานที่
+        } else {
+          placesList.style.display = "none"; // ซ่อน container หากไม่มีการเลือก
+        }
+      }
+
+      function hideAllDistricts() {
+        const allDistricts = document.querySelectorAll(".district");
+        allDistricts.forEach((district) => {
+          district.style.display = "none"; // ซ่อนอำเภอ
+        });
+      }
+
+      function showSelectedDistrict(selectedDistrict) {
+        const selectedContent = document.querySelector(
+          `.district.${selectedDistrict}`
+        );
+        if (selectedContent) {
+          selectedContent.style.display = "block"; // แสดงอำเภอที่เลือก
+        }
+      }
+    </script>
+  </div>
+</div>
+{% endblock content %}
