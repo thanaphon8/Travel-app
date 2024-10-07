@@ -1,4 +1,4 @@
-{% extends "nav.html" %} {% block content %}
+{% extends "nav.html" %} {% block content %} {% load static %}
 <div class="news-container">
   <style>
     body {
@@ -103,28 +103,27 @@
     }
   </style>
   <section id="portfolio" class="bg-dark text-light text-center">
-        <div class="container">
-            <h2>ผลงานของเรา</h2>
-            <div class="row">
-                <div class="col-md-4 portfolio-item">
-                    <img src="https://via.placeholder.com/350" alt="Project 1">
-                    <h4>โปรเจค 1</h4>
-                    <p>รายละเอียดเกี่ยวกับโปรเจค 1</p>
-                </div>
-                <div class="col-md-4 portfolio-item">
-                    <img src="https://via.placeholder.com/350" alt="Project 2">
-                    <h4>โปรเจค 2</h4>
-                    <p>รายละเอียดเกี่ยวกับโปรเจค 2</p>
-                </div>
-                <div class="col-md-4 portfolio-item">
-                    <img src="https://via.placeholder.com/350" alt="Project 3">
-                    <h4>โปรเจค 3</h4>
-                    <p>รายละเอียดเกี่ยวกับโปรเจค 3</p>
-                </div>
-            </div>
+    <div class="container">
+      <h2>ผลงานของเรา</h2>
+      <div class="row">
+        <div class="col-md-4 portfolio-item">
+          <img src="https://via.placeholder.com/350" alt="Project 1" />
+          <h4>โปรเจค 1</h4>
+          <p>รายละเอียดเกี่ยวกับโปรเจค 1</p>
         </div>
-    </section>
-
+        <div class="col-md-4 portfolio-item">
+          <img src="https://via.placeholder.com/350" alt="Project 2" />
+          <h4>โปรเจค 2</h4>
+          <p>รายละเอียดเกี่ยวกับโปรเจค 2</p>
+        </div>
+        <div class="col-md-4 portfolio-item">
+          <img src="https://via.placeholder.com/350" alt="Project 3" />
+          <h4>โปรเจค 3</h4>
+          <p>รายละเอียดเกี่ยวกับโปรเจค 3</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <script>
     function toggleDetails(id, button) {
