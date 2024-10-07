@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tarvel in Sikaket</title>
+    <title>Travel in Sisaket</title>
     <style>
-       body {
+      body {
         margin: 0;
         font-family: Arial, sans-serif;
         height: 2000px;
@@ -27,7 +27,6 @@
         right: 0;
         z-index: 1000;
       }
-      /* ... (remaining CSS remains the same) ... */
       .navbar ul {
         list-style-type: none;
         margin: 0;
@@ -36,7 +35,6 @@
         overflow: hidden;
         transition: max-height 0.5s ease, opacity 0.5s ease;
         opacity: 0;
-        background-color: rgba(245, 245, 245, 0); /* สีใส */
         background-color: transparent; /* สีใส */
         position: absolute;
         top: 100%;
@@ -113,7 +111,7 @@
       <a href="#" id="logo-btn">
         <img
           src="https://www.shutterstock.com/image-vector/sisaket-map-black-lettering-design-600nw-2330119171.jpg"
-          alt="tarvel in Sisaket"
+          alt="travel in Sisaket"
           class="navbar-icon"
         />
       </a>
@@ -129,6 +127,7 @@
         <li><a href="#"></a></li>
         <li><a href="#"></a></li>
       </ul>
+      <img class="toggle-icon" id="toggle-btn" src="toggle.png" alt="Toggle Menu" />
     </nav>
 
     <script>
@@ -143,12 +142,7 @@
       document.addEventListener("click", function (event) {
         var menu = document.getElementById("navbar-menu");
         var toggleButton = document.getElementById("toggle-btn");
-        var profileButton = document.querySelector(".profile");
-        if (
-          !menu.contains(event.target) &&
-          !toggleButton.contains(event.target) &&
-          !profileButton.contains(event.target)
-        ) {
+        if (!menu.contains(event.target) && !toggleButton.contains(event.target)) {
           menu.classList.remove("show");
         }
       });
