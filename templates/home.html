@@ -1,5 +1,4 @@
-{% extends "nav.html" %}
-{% block content %}
+{% extends "nav.html" %} {% block content %}
 <title>Latest Products</title>
 <style>
   body {
@@ -45,11 +44,11 @@
   }
   .product img {
     width: 100%;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ffffff;
     transition: transform 0.3s;
   }
   .product-content {
-    padding: 10px;
+    padding: 20px;
   }
   .product-content h2 {
     font-size: 18px;
@@ -58,10 +57,10 @@
   .product-content p {
     font-size: 12px;
     margin: 5px 0;
-    color: #666;
+    color: #ffffff;
   }
   button {
-    background-color: #002d80;
+    background-color: #ff9900;
     color: white;
     border: none;
     border-radius: 5px;
@@ -74,44 +73,101 @@
     transform: scale(1.1);
   }
 
-  /* About Section */
-  .about {
-    margin-top: 250px;
-    text-align: center;
+/* About Section */
+.about {
+  margin-top: 250px;
+  text-align: center;
+}
+ .about h2 {
+    color: white; /* Change the color of the title to white */
   }
-  .team-member {
-    display: inline-block;
-    width: 20%; /* Four members side by side */
-    margin: 10px;
-    text-align: center;
-  }
-  .team-member img {
-    border-radius: 50%;
-    width: 80%; /* Responsive image size */
-    height: auto;
-  }
-  .team-member h3 {
-    font-size: 16px;
-    margin: 10px 0 5px 0;
-  }
-  .team-member p {
-    font-size: 14px;
-    color: #666;
+.team {
+  display: flex;
+  flex-wrap: wrap; /* ให้สมาชิกในทีมเรียงกันลงมาได้ */
+  justify-content: center; /* จัดกลาง */
+}
+
+.team-member {
+  display: inline-block;
+  width: 20%; /* สี่สมาชิกข้างเคียง */
+  margin: 9px;
+  text-align: center;
+}
+
+.team-member img {
+  border-radius: 50%;
+  width: 80%; /* ขนาดภาพที่ตอบสนอง */
+  height: auto;
+}
+
+.team-member h3 {
+  font-size: 14px;
+  margin: 10px 0 5px 0;
+  color: #ffffff; /* เปลี่ยนสีข้อความเป็นขาว */
+}
+
+.team-member p {
+  font-size: 14px;
+  color: #ffffff; /* สีข้อความสำหรับคำอธิบายเป็นขาว */
+}
+
+@media (max-width: 768px) {
+  .team {
+    flex-direction: column; /* เรียงในแนวตั้งสำหรับมือถือ */
+    align-items: center;
   }
 
-  @media (max-width: 768px) {
-    .products {
-      flex-direction: column;
-      align-items: center;
-    }
-    .product {
-      width: 100%;
-      margin-bottom: 20px;
-    }
-    .team-member {
-      width: 100%; /* Full width on mobile */
-    }
+  .team-member {
+    width: 100%; /* ความกว้างเต็มในมือถือ */
   }
+}
+/* About Section */
+.about {
+  margin-top: 250px;
+  text-align: center;
+}
+
+.team {
+  display: flex;
+  flex-wrap: wrap; /* ให้สมาชิกในทีมเรียงกันลงมาได้ */
+  justify-content: center; /* จัดกลาง */
+}
+
+.team-member {
+  display: inline-block;
+  width: 20%; /* สี่สมาชิกข้างเคียง */
+  margin: 9px;
+  text-align: center;
+}
+
+.team-member img {
+  border-radius: 50%;
+  width: 80%; /* ขนาดภาพที่ตอบสนอง */
+  height: auto;
+}
+
+.team-member h3 {
+  font-size: 14px;
+  margin: 10px 0 5px 0;
+  color: #ffffff; /* เปลี่ยนสีข้อความเป็นขาว */
+}
+
+.team-member p {
+  font-size: 14px;
+  color: #ffffff; /* สีข้อความสำหรับคำอธิบายเป็นขาว */
+}
+
+@media (max-width: 768px) {
+  .team {
+    flex-direction: column; /* เรียงในแนวตั้งสำหรับมือถือ */
+    align-items: center;
+  }
+
+  .team-member {
+    width: 100%; /* ความกว้างเต็มในมือถือ */
+  }
+}
+
 </style>
 
 <body>
@@ -122,8 +178,8 @@
       <!-- Your product items go here -->
     </div>
 
-    <div style="text-align: center; margin-top: 20px;">
-      <a href="option" style="text-decoration: none;">
+    <div style="text-align: center; margin-top: 20px">
+      <a href="option" style="text-decoration: none">
         <button>Go Travel Now</button>
       </a>
     </div>
@@ -132,24 +188,25 @@
     <div class="about">
       <h2>ผู้จัดทำ</h2>
       <div class="team-member">
-        <img src="path/to/image1.jpg" alt="Member 1">
+        <img src="https://i.pinimg.com/736x/7f/61/42/7f61428be7ec2f97dfef82054ffddd5a.jpg" alt="Member 1" />
         <h3>นายธนาพนธ์ แต้มมาก</h3>
-        <p>ID:</p>
+        <p>ID:6612732112</p>
       </div>
       <div class="team-member">
-        <img src="path/to/image2.jpg" alt="Member 2">
+        <img src="https://i.pinimg.com/736x/ce/43/bb/ce43bbf87a43d883ddd372d7af8f654c.jpg" alt="Member 2" />
         <h3>วิมลชัย ด่านประสิทธิ์ผล</h3>
-        <p>ID:</p>
+        <p>ID:6612732126</p>
       </div>
       <div class="team-member">
-        <img src="path/to/image3.jpg" alt="Member 3">
-        <h3>นายธนาสุข เครือศรี   </h3>
-        <p>ID:</p>
+        <img src="https://i.pinimg.com/736x/eb/a9/c4/eba9c4566aa85ff50eb70725b1d05978.jpg" alt="Member 3" />
+        <h3>นายธนาสุข เครือศรี
+        </h3>
+        <p>ID:6612732113</p>
       </div>
       <div class="team-member">
-        <img src="path/to/image4.jpg" alt="Member 4">
+        <img src="https://i.pinimg.com/736x/80/ee/79/80ee79efd77edbd94433ca16511d4e24.jpg" alt="Member 4" />
         <h3>นายเกียรติศักดิ์ ช่างทอง</h3>
-        <p> ID:</p>
+        <p>ID:6612732104</p>
       </div>
     </div>
   </div>
