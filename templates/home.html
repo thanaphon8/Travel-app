@@ -1,4 +1,5 @@
-{% extends "nav.html" %} {% block content %}
+{% extends "nav.html" %}
+{% block content %}
 <title>Latest Products</title>
 <style>
   body {
@@ -6,10 +7,15 @@
     background-color: #f8f8f8;
     margin: 0;
     padding: 0;
-    padding-top: 80px; /* เพิ่ม padding-top เพื่อเลื่อนเนื้อหาลงมา */
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto; /* Adjusted height */
   }
   .container {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
   }
@@ -22,14 +28,15 @@
   .products {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
+    gap: 10px;
+    flex-wrap: wrap;
   }
   .product {
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 30%;
+    width: 45%;
     transition: transform 0.3s, box-shadow 0.3s;
   }
   .product:hover {
@@ -42,41 +49,56 @@
     transition: transform 0.3s;
   }
   .product-content {
-    padding: 20px;
-    transition: transform 0.3s;
+    padding: 10px;
   }
   .product-content h2 {
-    font-size: 20px;
-    margin: 0 0 10px 0;
+    font-size: 18px;
+    margin: 0 0 5px 0;
   }
   .product-content p {
-    font-size: 14px;
+    font-size: 12px;
     margin: 5px 0;
     color: #666;
   }
-  .product-content .price {
-    font-size: 16px;
-    color: #333;
-    font-weight: bold;
-  }
-
-  /* ปรับปรุงปุ่ม */
   button {
     background-color: #002d80;
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 15px 30px; /* เพิ่มขนาด padding */
-    font-size: 18px; /* เพิ่มขนาดฟอนต์ */
+    padding: 15px 30px;
+    font-size: 18px;
     cursor: pointer;
     transition: transform 0.3s;
   }
-
   button:hover {
-    transform: scale(1.1); /* ขยายขนาดปุ่มเล็กน้อย */
+    transform: scale(1.1);
   }
 
-  /* Media query for mobile */
+  /* About Section */
+  .about {
+    margin-top: 40px;
+    text-align: center;
+  }
+  .team-member {
+    display: inline-block;
+    width: 20%; /* Four members side by side */
+    margin: 10px;
+    text-align: center;
+  }
+  .team-member img {
+    border-radius: 50%;
+    width: 80%; /* Responsive image size */
+    height: auto;
+  }
+  .team-member h3 {
+    font-size: 16px;
+    margin: 10px 0 5px 0;
+  }
+  .team-member p {
+    font-size: 14px;
+    color: #666;
+  }
+
   @media (max-width: 768px) {
     .products {
       flex-direction: column;
@@ -86,46 +108,49 @@
       width: 100%;
       margin-bottom: 20px;
     }
+    .team-member {
+      width: 100%; /* Full width on mobile */
+    }
   }
 </style>
 
 <body>
   <div class="container">
-    <div class="title">ผลิตภัณฑ์ล่าสุดของเรา มาดูว่ามีอะไรใหม่บ้างได้เลย</div>
+    <div class="title">สถานที่เที่ยวในจังหวัดศรีสะเกษ</div>
+
     <div class="products">
-      <!-- Product 1 -->
-      <div class="product">
-        <img src="static/images/profile.png" alt="iPhne 16 Pr" />
-        <div class="product-content">
-          <h2>iPhne 16 Pr</h2>
-          <p>ที่สุดของ iPhne</p>
-          <p class="price">เริ่มต้นที่ ฿39,900</p>
-        </div>
-      </div>
-      <!-- Product 2 -->
-      <div class="product">
-        <img src="static/images/profile.png" alt="Apple Watch Series 10" />
-        <div class="product-content">
-          <h2>Apple Watch Series 10</h2>
-          <p>บางกว่าเคย คลาสสิกเหมือนเคย</p>
-          <p class="price">เริ่มต้นที่ ฿14,900</p>
-        </div>
-      </div>
-      <!-- Product 3 -->
-      <div class="product">
-        <img src="static/images/profile.png" alt="iPhne 16" />
-        <div class="product-content">
-          <h2>iPhne 16</h2>
-          <p>ขุมพลังครบเครื่อง</p>
-          <p class="price">เริ่มต้นที่ ฿29,900</p>
-        </div>
-      </div>
+      <!-- Your product items go here -->
     </div>
-    <!-- ปุ่ม Go Travel Now -->
-    <div style="text-align: center; margin-top: 20px">
-      <a href="travel" style="text-decoration: none">
+
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="option" style="text-decoration: none;">
         <button>Go Travel Now</button>
       </a>
+    </div>
+
+    <!-- About Section -->
+    <div class="about">
+      <h2>ผู้จัดทำ</h2>
+      <div class="team-member">
+        <img src="path/to/image1.jpg" alt="Member 1">
+        <h3>นายธนาพนธ์ แต้มมาก</h3>
+        <p>ID:</p>
+      </div>
+      <div class="team-member">
+        <img src="path/to/image2.jpg" alt="Member 2">
+        <h3>วิมลชัย ด่านประสิทธิ์ผล</h3>
+        <p>ID:</p>
+      </div>
+      <div class="team-member">
+        <img src="path/to/image3.jpg" alt="Member 3">
+        <h3>นายธนาสุข เครือศรี   </h3>
+        <p>ID:</p>
+      </div>
+      <div class="team-member">
+        <img src="path/to/image4.jpg" alt="Member 4">
+        <h3>นายเกียรติศักดิ์ ช่างทอง</h3>
+        <p> ID:</p>
+      </div>
     </div>
   </div>
 </body>
