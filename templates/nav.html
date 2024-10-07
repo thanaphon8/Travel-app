@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Navbar คล้าย Apple</title>
     <style>
-      body {
+       body {
         margin: 0;
         font-family: Arial, sans-serif;
         height: 2000px;
         padding-top: 60px; /* เพิ่มระยะห่างจาก navbar */
+        background-image: url('https://cdn.pixabay.com/photo/2021/11/21/21/14/mountain-6815304_1280.jpg'); /* เปลี่ยนเป็น URL ของรูปภาพ */
+        background-size: cover; /* ปรับขนาดให้เต็มหน้าจอ */
+        background-position: center; /* จัดตำแหน่งให้กลาง */
+        background-repeat: no-repeat; /* ไม่ให้รูปซ้ำ */
       }
       .navbar {
-        background-color: #f5f5f5; /* สีพื้นหลังเทาอ่อน */
+        background-color: rgba(245, 245, 245, 0.9); /* สีพื้นหลังเทาอ่อนแบบโปร่งแสง */
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -23,6 +27,7 @@
         right: 0;
         z-index: 1000;
       }
+      /* ... (remaining CSS remains the same) ... */
       .navbar ul {
         list-style-type: none;
         margin: 0;
@@ -124,7 +129,7 @@
       <a href="#" id="logo-btn">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
-          alt="Apple"
+          alt="tarvel"
           class="navbar-icon"
         />
         <img
