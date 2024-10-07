@@ -5,18 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Navbar คล้าย Apple</title>
     <style>
-       body {
+      body {
         margin: 0;
         font-family: Arial, sans-serif;
         height: 2000px;
         padding-top: 60px; /* เพิ่มระยะห่างจาก navbar */
-        background-image: url('https://cdn.pixabay.com/photo/2021/11/21/21/14/mountain-6815304_1280.jpg'); /* เปลี่ยนเป็น URL ของรูปภาพ */
+        background-image: url("https://cdn.pixabay.com/photo/2021/11/21/21/14/mountain-6815304_1280.jpg"); /* เปลี่ยนเป็น URL ของรูปภาพ */
         background-size: cover; /* ปรับขนาดให้เต็มหน้าจอ */
         background-position: center; /* จัดตำแหน่งให้กลาง */
         background-repeat: no-repeat; /* ไม่ให้รูปซ้ำ */
       }
       .navbar {
-        background-color: rgba(245, 245, 245, 0.9); /* สีพื้นหลังเทาอ่อนแบบโปร่งแสง */
+        background-color: rgba(
+          245,
+          245,
+          245,
+          0.9
+        ); /* สีพื้นหลังเทาอ่อนแบบโปร่งแสง */
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -27,7 +32,6 @@
         right: 0;
         z-index: 1000;
       }
-      /* ... (remaining CSS remains the same) ... */
       .navbar ul {
         list-style-type: none;
         margin: 0;
@@ -37,7 +41,6 @@
         transition: max-height 0.5s ease, opacity 0.5s ease;
         opacity: 0;
         background-color: rgba(245, 245, 245, 0); /* สีใส */
-        background-color: transparent; /* สีใส */
         position: absolute;
         top: 100%;
         left: 0;
@@ -130,13 +133,17 @@
       <a href="#" id="logo-btn">
         <img
           src="https://www.shutterstock.com/image-vector/sisaket-map-black-lettering-design-600nw-2330119171.jpg"
-          alt="tarvel in Sisaket"
+          alt="Travel in Sisaket"
           class="navbar-icon"
         />
       </a>
+      <div class="toggle-icon" id="toggle-btn">☰</div>
+      <!-- ปุ่ม toggle -->
       <ul id="navbar-menu">
         <li><a href="http://127.0.0.1:8000/">Home</a></li>
-        <li><a href="http://127.0.0.1:8000/travel/">แนะนำวัดในจังหวัดศรีสะเกษ</a></li>
+        <li>
+          <a href="http://127.0.0.1:8000/travel/">แนะนำวัดในจังหวัดศรีสะเกษ</a>
+        </li>
         <li><a href="http://127.0.0.1:8000/option/">เลือกสถานที่เที่ยว</a></li>
         <li><a href="#"></a></li>
         <li><a href="#"></a></li>
@@ -148,8 +155,14 @@
       </ul>
       <div class="navbar-right">
         <div class="profile">
-          <img src="static/images/profile.png" alt="Profile" class="icon" />
+          <img
+            src="{% static 'images/profile.png' %}"
+            alt="Profile"
+            class="icon"
+          />
+          <!-- เปลี่ยนเป็นการเรียกใช้ไฟล์จาก static -->
         </div>
+      </div>
     </nav>
 
     <script>
